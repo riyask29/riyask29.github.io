@@ -1,0 +1,1279 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Riya Kapadnis | AI Engineer, Data Engineer, Data Analyst</title>
+<meta name="description" content="Riya Kapadnis, AI engineer, data engineer, and data analyst in Boston. LLM apps, RAG, agentic workflows, data pipelines, and analytics. MS Information Systems, Northeastern, December 2026.">
+<meta property="og:title" content="Riya Kapadnis | AI Engineer, Data Engineer, Data Analyst">
+<meta property="og:description" content="AI products, data pipelines, and dashboards that turn messy data into answers people can act on.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('rk-theme'); } catch (e) {}
+    if (!t) t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
+<style>
+:root, :root[data-theme="dark"] {
+  --bg: #0a1016;
+  --surface: #101922;
+  --surface-2: #15212c;
+  --line: #213140;
+  --text: #e9f1f4;
+  --muted: #8ea3ae;
+  --mint: #5eead4;
+  --mint-ink: #04241f;
+  --mint-soft: rgba(94, 234, 212, 0.12);
+  --violet: #b4a1ff;
+  --violet-soft: rgba(180, 161, 255, 0.14);
+  --amber: #fcd34d;
+  --amber-ink: #2a1f00;
+  --glow: rgba(94, 234, 212, 0.16);
+  --gridline: rgba(94, 234, 212, 0.05);
+  --shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.8);
+  color-scheme: dark;
+}
+:root[data-theme="light"] {
+  --bg: #f4f7f8;
+  --surface: #ffffff;
+  --surface-2: #eef3f5;
+  --line: #d6e0e4;
+  --text: #0e1a21;
+  --muted: #4f626c;
+  --mint: #08766a;
+  --mint-ink: #ffffff;
+  --mint-soft: rgba(8, 118, 106, 0.1);
+  --violet: #6d4fe0;
+  --violet-soft: rgba(109, 79, 224, 0.1);
+  --amber: #f5c518;
+  --amber-ink: #2a1f00;
+  --glow: rgba(8, 118, 106, 0.12);
+  --gridline: rgba(14, 26, 33, 0.05);
+  --shadow: 0 24px 60px -34px rgba(14, 26, 33, 0.35);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.0625rem; line-height: 1.6; -webkit-font-smoothing: antialiased;
+}
+.mono { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }
+a { color: var(--mint); text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--mint); outline-offset: 3px; border-radius: 4px; }
+img { max-width: 100%; }
+button { font: inherit; color: inherit; }
+.wrap { max-width: 74rem; margin: 0 auto; padding-inline: clamp(1rem, 4vw, 2.5rem); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* ---------- Nav ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 30;
+  background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line); padding-top: env(safe-area-inset-top, 0px);
+}
+.nav .wrap { display: flex; align-items: center; gap: 1rem; min-height: 4rem; }
+.logo { font-weight: 700; font-size: 1.25rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+.logo span { color: var(--mint); }
+.nav-links { display: flex; gap: 1.4rem; list-style: none; margin: 0 0 0 1.5rem; padding: 0; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 0.95rem; }
+.nav-links a:hover { color: var(--text); }
+.nav-tools { margin-left: auto; display: flex; align-items: center; gap: 0.5rem; }
+.mode {
+  display: inline-flex; padding: 3px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface);
+}
+.mode button {
+  border: 0; background: transparent; padding: 0.3rem 0.75rem; border-radius: 999px; cursor: pointer;
+  font-family: "JetBrains Mono", monospace; font-size: 0.75rem; color: var(--muted);
+}
+.mode button[aria-pressed="true"] { background: var(--mint); color: var(--mint-ink); font-weight: 600; }
+.icon-btn {
+  width: 2.25rem; height: 2.25rem; display: inline-grid; place-items: center; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--surface); cursor: pointer; color: var(--text);
+}
+.icon-btn:hover { border-color: var(--mint); }
+.icon-btn svg { width: 1.05rem; height: 1.05rem; }
+.resume-link {
+  background: var(--mint); color: var(--mint-ink); text-decoration: none; font-weight: 600;
+  padding: 0.45rem 0.95rem; border-radius: 8px; font-size: 0.92rem;
+}
+@media (max-width: 900px) { .nav-links { display: none; } }
+@media (max-width: 520px) { .mode button { padding: 0.3rem 0.55rem; } .kbd-btn { display: none; } .resume-link { padding: 0.45rem 0.7rem; } }
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; padding-block: clamp(3rem, 8vw, 6rem) clamp(3rem, 6vw, 4.5rem); }
+.hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(var(--gridline) 1px, transparent 1px), linear-gradient(90deg, var(--gridline) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 80% 70% at 30% 30%, #000 30%, transparent 75%);
+}
+.hero::after {
+  content: ""; position: absolute; width: 46rem; height: 46rem; left: -12rem; top: -18rem; pointer-events: none;
+  background: radial-gradient(circle, var(--glow), transparent 65%);
+}
+.hero .wrap { position: relative; z-index: 1; display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+.hero .wrap > * { min-width: 0; }
+@media (max-width: 960px) { .hero .wrap { grid-template-columns: 1fr; } }
+.status {
+  display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.35rem 0.85rem; border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--mint) 45%, transparent); background: var(--mint-soft);
+  color: var(--mint); font-family: "JetBrains Mono", monospace; font-size: 0.78rem;
+}
+.status .dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--mint); flex: none; animation: pulse 2s infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--mint) 60%, transparent); } 70% { box-shadow: 0 0 0 10px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+.hello { margin: 0 0 0.25rem; font-size: 1.3rem; color: var(--muted); }
+.who { display: flex; align-items: center; gap: 1.25rem; }
+.avatar { width: clamp(4.5rem, 9vw, 6.5rem); aspect-ratio: 1; border-radius: 50%; object-fit: cover; border: 3px solid var(--mint); flex: none; }
+.hero h1 {
+  margin: 0; font-size: clamp(3rem, 8vw, 5.75rem); line-height: 1; letter-spacing: -0.04em; font-weight: 700;
+  background: linear-gradient(100deg, var(--text) 35%, var(--mint) 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.typed { margin: 1.1rem 0 0.4rem; font-size: clamp(1.35rem, 2.6vw, 1.9rem); font-weight: 600; min-height: 2.6em; }
+.typed .rot { color: var(--mint); }
+.typed .caret { display: inline-block; width: 2px; height: 1.1em; background: var(--mint); vertical-align: -0.15em; margin-left: 2px; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.tagline { font-family: "JetBrains Mono", monospace; color: var(--mint); font-size: 0.95rem; margin: 0 0 0.35rem; }
+.tools-line { font-family: "JetBrains Mono", monospace; color: var(--muted); font-size: 0.82rem; margin: 0 0 1.25rem; }
+.intro { max-width: 46ch; margin: 0 0 2rem; font-size: 1.1rem; }
+.cta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.3rem; border-radius: 10px;
+  font-weight: 600; text-decoration: none; border: 1px solid var(--line); color: var(--text); background: var(--surface); cursor: pointer;
+}
+.btn:hover { border-color: var(--mint); }
+.btn.primary { background: var(--mint); color: var(--mint-ink); border-color: var(--mint); }
+.btn.primary:hover { filter: brightness(1.08); }
+.socials { display: flex; gap: 0.4rem; margin-left: 0.25rem; }
+.socials a { width: 2.6rem; height: 2.6rem; display: grid; place-items: center; border-radius: 10px; color: var(--muted); }
+.socials a:hover { color: var(--mint); background: var(--mint-soft); }
+.socials svg { width: 1.3rem; height: 1.3rem; }
+
+/* ---------- Stats ---------- */
+.stats { border-block: 1px solid var(--line); background: var(--surface); }
+.stats .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 760px) { .stats .wrap { grid-template-columns: repeat(2, 1fr); } }
+.stat { padding: 1.75rem 1rem 1.75rem 0; }
+.stat b { display: block; font-size: clamp(2.2rem, 4.5vw, 3.2rem); line-height: 1; color: var(--mint); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.stat span { display: block; color: var(--muted); margin-top: 0.6rem; font-size: 0.95rem; max-width: 22ch; }
+
+/* ---------- Sections ---------- */
+section.sec { padding-block: clamp(3.5rem, 8vw, 6rem); }
+.sec-head { margin-bottom: 2.25rem; }
+.kicker { font-family: "JetBrains Mono", monospace; color: var(--mint); font-size: 0.85rem; margin: 0 0 0.6rem; }
+.sec-head h2 { margin: 0; font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.1; letter-spacing: -0.03em; }
+.sec-head p { color: var(--muted); max-width: 60ch; margin: 0.8rem 0 0; }
+
+/* About */
+.about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(2rem, 5vw, 4rem); }
+@media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } }
+.about-text p { margin: 0 0 1.1rem; max-width: 62ch; }
+.about-text p.lead { font-size: 1.35rem; line-height: 1.45; }
+.facts { display: grid; gap: 0.75rem; align-content: start; }
+.fact { display: flex; gap: 0.9rem; align-items: flex-start; padding: 1rem 1.1rem; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.fact .ic { width: 2.2rem; height: 2.2rem; border-radius: 8px; display: grid; place-items: center; background: var(--mint-soft); color: var(--mint); flex: none; }
+.fact .ic.v { background: var(--violet-soft); color: var(--violet); }
+.fact .ic svg { width: 1.1rem; height: 1.1rem; }
+.fact b { display: block; }
+.fact span { color: var(--muted); font-size: 0.93rem; }
+
+/* Projects */
+.filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+.chip {
+  border: 1px solid var(--line); background: var(--surface); color: var(--muted); border-radius: 999px;
+  padding: 0.4rem 0.95rem; cursor: pointer; font-family: "JetBrains Mono", monospace; font-size: 0.8rem;
+}
+.chip:hover { color: var(--text); }
+.chip[aria-pressed="true"] { background: var(--mint-soft); color: var(--mint); border-color: var(--mint); }
+.filter-note { font-size: 0.92rem; color: var(--muted); margin: 0 0 1.25rem; min-height: 1.4em; }
+.filter-note button { border: 0; background: none; color: var(--mint); cursor: pointer; text-decoration: underline; padding: 0; }
+.cards { display: grid; gap: 1.25rem; }
+.card {
+  border: 1px solid var(--line); background: var(--surface); border-radius: 16px; padding: clamp(1.25rem, 3vw, 2rem);
+  transition: border-color .2s;
+}
+.card:hover { border-color: color-mix(in srgb, var(--mint) 50%, var(--line)); }
+.card[hidden] { display: none; }
+.card { scroll-margin-top: 0.75rem; }
+.card-top { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: flex-start; }
+.card-ic { width: 3rem; height: 3rem; border-radius: 12px; display: grid; place-items: center; background: var(--mint-soft); color: var(--mint); }
+.card-ic svg { width: 1.4rem; height: 1.4rem; }
+.badge {
+  font-family: "JetBrains Mono", monospace; font-size: 0.74rem; padding: 0.25rem 0.65rem; border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--violet) 50%, transparent); color: var(--violet); background: var(--violet-soft);
+}
+.badge.ind { border-color: color-mix(in srgb, var(--mint) 50%, transparent); color: var(--mint); background: var(--mint-soft); }
+.card h3 { margin: 1rem 0 0.3rem; font-size: clamp(1.35rem, 2.6vw, 1.65rem); letter-spacing: -0.02em; line-height: 1.2; }
+.card .one { color: var(--muted); margin: 0 0 1.25rem; font-size: 1.05rem; }
+.mypart { border-left: 3px solid var(--mint); padding: 0.2rem 0 0.2rem 1rem; margin: 0 0 1.25rem; max-width: 70ch; }
+.mypart b { color: var(--mint); font-weight: 600; }
+.story { display: grid; gap: 0.8rem; margin: 0 0 1.5rem; max-width: 70ch; }
+.story > div { display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; }
+@media (max-width: 560px) { .story > div { grid-template-columns: 1fr; gap: 0.1rem; } }
+.story dt { font-family: "JetBrains Mono", monospace; font-size: 0.8rem; color: var(--muted); padding-top: 0.2rem; }
+.story dd { margin: 0; }
+.brief .deep { display: none !important; }
+.flow { list-style: none; margin: 0 0 1.25rem; padding: 1rem; display: flex; gap: 1.5rem; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-2); }
+.flow li {
+  position: relative; flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: center; text-align: center;
+  font-family: "JetBrains Mono", monospace; font-size: 0.74rem; line-height: 1.35; padding: 0.6rem 0.5rem;
+  border-radius: 8px; border: 1px dashed var(--line); color: var(--muted);
+}
+.flow li.mine { border: 1.5px solid var(--mint); background: var(--mint-soft); color: var(--text); }
+.flow li:not(:last-child)::after { content: ""; position: absolute; right: -1.3rem; top: 50%; width: 1.1rem; border-top: 1.5px dotted var(--muted); }
+@media (max-width: 760px) {
+  .flow { flex-direction: column; gap: 1rem; }
+  .flow li:not(:last-child)::after { right: auto; left: 50%; top: 100%; width: 0; height: 1rem; border-top: 0; border-left: 1.5px dotted var(--muted); }
+}
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; margin: 0; padding: 0; }
+.tags li { font-family: "JetBrains Mono", monospace; font-size: 0.74rem; padding: 0.2rem 0.6rem; border-radius: 6px; background: var(--surface-2); color: var(--muted); border: 1px solid var(--line); }
+.card-links { margin-top: 1.25rem; display: flex; gap: 1.25rem; flex-wrap: wrap; }
+.card-links a { font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; }
+.card-links a:hover { text-decoration: underline; }
+.card-links svg { width: 1.05rem; height: 1.05rem; }
+
+/* GenBI try-it sheet */
+.tryit { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 0 0 1.5rem; align-items: start; }
+@media (max-width: 860px) { .tryit { grid-template-columns: 1fr; } }
+.tryit > * { min-width: 0; }
+.ask-label { font-family: "JetBrains Mono", monospace; font-size: 0.8rem; color: var(--muted); margin: 0 0 0.6rem; }
+.asks { display: flex; flex-direction: column; gap: 0.5rem; }
+.ask {
+  text-align: left; border: 1px solid var(--line); background: var(--surface-2); border-radius: 10px; padding: 0.7rem 0.9rem; cursor: pointer;
+}
+.ask:hover { border-color: var(--mint); }
+.ask[aria-pressed="true"] { border-color: var(--mint); background: var(--mint-soft); }
+.sheet { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--surface-2); font-family: "JetBrains Mono", monospace; font-size: 0.78rem; }
+.sheet-fx { display: flex; gap: 0.6rem; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--line); color: var(--muted); white-space: nowrap; overflow: hidden; }
+.sheet-fx .f { color: var(--text); overflow: hidden; text-overflow: ellipsis; }
+.sheet-body { display: grid; grid-template-columns: auto 1fr; }
+.sheet table { border-collapse: collapse; }
+.sheet td { border: 1px solid var(--line); padding: 0.28rem 0.6rem; transition: background .3s, color .3s; }
+.sheet td.n { text-align: right; font-variant-numeric: tabular-nums; }
+.sheet tr.hl td { background: var(--amber); color: var(--amber-ink); }
+.sheet tr.head td { color: var(--muted); }
+.sheet svg { width: 100%; height: auto; display: block; padding: 0.6rem; }
+.sheet .bar { fill: color-mix(in srgb, var(--mint) 30%, transparent); transition: fill .3s; }
+.sheet .bar.on { fill: var(--mint); }
+.sheet .lbl { fill: var(--muted); font-size: 9px; font-family: inherit; }
+.sheet-ans { border-top: 1px solid var(--line); padding: 0.7rem 0.9rem; font-family: "Space Grotesk", sans-serif; font-size: 0.95rem; min-height: 3.2rem; }
+.sheet-ans b { color: var(--mint); }
+
+/* More projects table */
+.more > h3 { margin: 3rem 0 1rem; font-size: 1.35rem; }
+.table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+table.data { border-collapse: collapse; width: 100%; min-width: 680px; font-size: 0.95rem; }
+table.data th, table.data td { text-align: left; padding: 0.85rem 1rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.data thead th { font-family: "JetBrains Mono", monospace; font-weight: 500; font-size: 0.78rem; color: var(--muted); background: var(--surface-2); }
+table.data tbody tr:last-child td { border-bottom: 0; }
+table.data td:first-child { font-weight: 600; }
+table.data .res { color: var(--mint); white-space: nowrap; font-weight: 600; }
+table.data tr.match td { background: var(--mint-soft); }
+
+/* Journey */
+.route { font-family: "JetBrains Mono", monospace; color: var(--muted); margin: 0 0 2rem; }
+.route b { color: var(--text); font-weight: 500; }
+.chapters { list-style: none; margin: 0; padding: 0; position: relative; }
+.chapters::before { content: ""; position: absolute; left: 1.35rem; top: 0.5rem; bottom: 0.5rem; width: 2px; background: linear-gradient(var(--mint), var(--violet)); opacity: 0.6; }
+.chapter { position: relative; padding: 0 0 2.75rem 4rem; }
+.chapter:last-child { padding-bottom: 0; }
+.pin { position: absolute; left: 0; top: 0; width: 2.75rem; height: 2.75rem; border-radius: 50%; border: 2px solid var(--mint); background: var(--bg); display: grid; place-items: center; color: var(--mint); }
+.pin svg { width: 1.1rem; height: 1.1rem; }
+.chapter .ch { font-family: "JetBrains Mono", monospace; color: var(--mint); font-size: 0.82rem; margin: 0.15rem 0 0.35rem; }
+.chapter h3 { margin: 0; font-size: clamp(1.25rem, 2.4vw, 1.5rem); letter-spacing: -0.015em; line-height: 1.25; }
+.chapter .where { color: var(--muted); margin: 0.3rem 0 0.9rem; font-size: 0.95rem; }
+.chapter .where .mono { font-size: 0.85rem; }
+.chapter ul.pts { margin: 0 0 1rem; padding-left: 1.1rem; max-width: 68ch; }
+.chapter ul.pts li { margin-bottom: 0.35rem; }
+.chapter ul.pts li::marker { color: var(--mint); }
+
+/* Skills */
+.skill-groups { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+@media (max-width: 760px) { .skill-groups { grid-template-columns: 1fr; } }
+.sg { border: 1px solid var(--line); background: var(--surface); border-radius: 14px; padding: 1.25rem; }
+.sg h3 { margin: 0 0 0.9rem; font-size: 1.05rem; }
+.sg .list { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.skill {
+  border: 1px solid var(--line); background: var(--surface-2); color: var(--text); border-radius: 8px; padding: 0.3rem 0.65rem;
+  font-size: 0.86rem; cursor: pointer;
+}
+.skill:hover { border-color: var(--mint); color: var(--mint); }
+.skill-hint { color: var(--muted); font-size: 0.92rem; margin: -1rem 0 1.5rem; }
+
+/* Contact */
+.contact-box {
+  position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: 20px; padding: clamp(1.75rem, 5vw, 3.5rem);
+  background: radial-gradient(ellipse 70% 90% at 100% 0%, var(--violet-soft), transparent 60%), radial-gradient(ellipse 60% 80% at 0% 100%, var(--mint-soft), transparent 60%), var(--surface);
+}
+.contact-box h2 { margin: 0 0 1rem; font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.08; letter-spacing: -0.03em; max-width: 18ch; }
+.contact-box p { color: var(--muted); max-width: 52ch; margin: 0 0 2rem; }
+.copied { color: var(--mint); font-size: 0.9rem; margin-left: 0.25rem; }
+
+footer { border-top: 1px solid var(--line); padding-block: 1.75rem calc(1.75rem + env(safe-area-inset-bottom, 0px)); color: var(--muted); font-size: 0.9rem; }
+footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+kbd { font-family: "JetBrains Mono", monospace; font-size: 0.78rem; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 0.05rem 0.35rem; background: var(--surface); }
+
+
+
+/* ---------- 30-sec view ---------- */
+.brief-view { display: none; padding-block: clamp(2rem, 5vw, 3.5rem) clamp(3rem, 6vw, 4.5rem); position: relative; }
+.brief .brief-view { display: block; }
+.brief .hero, .brief .stats, .brief main, .brief .deep-only { display: none !important; }
+.bv-kicker { font-family: "JetBrains Mono", monospace; color: var(--mint); font-size: 0.85rem; margin: 0 0 0.75rem; }
+.brief-view h1 { margin: 0; font-size: clamp(2.6rem, 6vw, 4.25rem); line-height: 1.02; letter-spacing: -0.035em;
+  background: linear-gradient(100deg, var(--text) 40%, var(--mint) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.bv-role { font-family: "JetBrains Mono", monospace; color: var(--mint); margin: 0.6rem 0 0.4rem; font-size: clamp(0.85rem, 1.6vw, 1rem); }
+.bv-status { color: var(--muted); margin: 0 0 1.75rem; display: flex; gap: 0.6rem; align-items: flex-start; }
+.bv-status svg { margin-top: 0.3rem; }
+.bv-status svg { width: 1.1rem; height: 1.1rem; color: var(--mint); flex: none; }
+.bv-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.85rem; margin-bottom: 2rem; }
+@media (max-width: 760px) { .bv-stats { grid-template-columns: 1fr; } }
+.bv-stat { border: 1px solid var(--line); background: var(--surface); border-radius: 14px; padding: 1.1rem 1.2rem; }
+.bv-stat b { display: block; font-size: 1.25rem; color: var(--mint); line-height: 1.2; letter-spacing: -0.01em; }
+.bv-stat span { display: block; color: var(--muted); font-size: 0.9rem; margin-top: 0.5rem; }
+.bv-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: clamp(1.25rem, 4vw, 2.5rem); margin-bottom: 2rem; }
+@media (max-width: 860px) { .bv-grid { grid-template-columns: 1fr; } }
+.bv-grid > * { min-width: 0; }
+.bv-label { font-family: "JetBrains Mono", monospace; color: var(--muted); font-size: 0.8rem; margin: 0 0 0.75rem; }
+.bv-projects { display: grid; gap: 0.6rem; }
+.bv-proj {
+  display: flex; gap: 0.85rem; align-items: flex-start; text-align: left; width: 100%; cursor: pointer;
+  border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 0.9rem 1rem;
+}
+.bv-proj:hover { border-color: var(--mint); }
+.bv-proj svg { width: 1.2rem; height: 1.2rem; color: var(--mint); flex: none; margin-top: 0.2rem; }
+.bv-proj b { font-weight: 600; }
+.bv-proj span { color: var(--muted); }
+.bv-proj em { display: block; font-style: normal; font-size: 0.82rem; color: var(--mint); margin-top: 0.2rem; font-family: "JetBrains Mono", monospace; }
+.bv-skills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.bv-skills span { font-family: "JetBrains Mono", monospace; font-size: 0.82rem; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 0.35rem 0.85rem; }
+
+
+/* ---------- Ask Riya chat ---------- */
+.chat-fab {
+  position: fixed; right: max(1rem, env(safe-area-inset-right, 0px)); bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); z-index: 40;
+  display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 1.25rem; border-radius: 999px; border: 0; cursor: pointer;
+  background: var(--mint); color: var(--mint-ink); font-weight: 600; box-shadow: 0 12px 30px -10px color-mix(in srgb, var(--mint) 60%, transparent);
+}
+.chat-fab svg { width: 1.15rem; height: 1.15rem; }
+.chat-fab:hover { filter: brightness(1.08); }
+.chat {
+  position: fixed; right: max(1rem, env(safe-area-inset-right, 0px)); bottom: calc(5.25rem + env(safe-area-inset-bottom, 0px)); z-index: 41;
+  width: min(25rem, calc(100vw - 2rem)); height: min(36rem, calc(100vh - 8rem)); display: flex; flex-direction: column;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); overflow: hidden;
+}
+.chat-head { display: flex; align-items: center; gap: 0.75rem; padding: 0.9rem 1rem; border-bottom: 1px solid var(--line); background: var(--surface-2); }
+.chat-av { position: relative; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: var(--mint); color: var(--mint-ink); display: grid; place-items: center; flex: none; font-weight: 700; }
+.chat-av::after { content: ""; position: absolute; right: 0; bottom: 0; width: 0.65rem; height: 0.65rem; border-radius: 50%; background: #22c55e; border: 2px solid var(--surface-2); }
+.chat-head b { display: block; line-height: 1.2; }
+.chat-head small { font-family: "JetBrains Mono", monospace; font-size: 0.72rem; color: var(--muted); }
+.chat-head .tools { margin-left: auto; display: flex; gap: 0.25rem; }
+.chat-head .tools button { width: 2rem; height: 2rem; border: 0; background: transparent; color: var(--muted); border-radius: 8px; cursor: pointer; display: grid; place-items: center; }
+.chat-head .tools button:hover { color: var(--text); background: var(--surface); }
+.chat-head .tools svg { width: 1.05rem; height: 1.05rem; }
+.chat-log { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.msg { max-width: 88%; line-height: 1.5; font-size: 0.95rem; }
+.msg.bot { align-self: flex-start; }
+.msg.me { align-self: flex-end; background: var(--mint); color: var(--mint-ink); padding: 0.55rem 0.9rem; border-radius: 16px 16px 4px 16px; font-weight: 500; }
+.msg.bot a { font-weight: 600; }
+.msg.bot .links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.4rem; }
+.typing { display: inline-flex; gap: 4px; padding: 0.5rem 0; }
+.typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: bob 1s infinite; }
+.typing i:nth-child(2) { animation-delay: .15s; } .typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes bob { 0%, 60%, 100% { transform: none; opacity: .5; } 30% { transform: translateY(-4px); opacity: 1; } }
+.chat-qs { border-top: 1px solid var(--line); padding: 0.75rem 1rem 0.5rem; display: flex; flex-wrap: wrap; gap: 0.45rem; max-height: 9.5rem; overflow-y: auto; }
+.chat-qs button {
+  border: 1px solid color-mix(in srgb, var(--mint) 45%, transparent); color: var(--mint); background: var(--mint-soft);
+  border-radius: 999px; padding: 0.35rem 0.8rem; font-size: 0.85rem; cursor: pointer; text-align: left;
+}
+.chat-qs button:hover { background: color-mix(in srgb, var(--mint) 22%, transparent); }
+.chat-form { display: flex; gap: 0.5rem; padding: 0.5rem 1rem 0.9rem; }
+.chat-form input { flex: 1; min-width: 0; background: var(--surface-2); border: 1px solid var(--line); color: var(--text); border-radius: 10px; padding: 0.6rem 0.8rem; font: inherit; font-size: 0.92rem; }
+.chat-form input:focus { outline: none; border-color: var(--mint); }
+.chat-form button { border: 0; background: var(--mint); color: var(--mint-ink); border-radius: 10px; padding: 0 0.9rem; cursor: pointer; font-weight: 600; }
+@media (max-width: 520px) {
+  .chat { right: 0.5rem; left: 0.5rem; width: auto; bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px)); height: min(34rem, calc(100vh - 7rem)); }
+}
+
+
+/* ---------- Hover glow ---------- */
+:root { --glow-ring: 0 0 0 1px var(--mint), 0 0 18px -2px color-mix(in srgb, var(--mint) 55%, transparent), 0 0 42px -8px color-mix(in srgb, var(--mint) 40%, transparent); }
+:root[data-theme="light"] { --glow-ring: 0 0 0 1px var(--mint), 0 6px 22px -6px color-mix(in srgb, var(--mint) 45%, transparent); }
+.flow li, .tags li, .stat, .bv-stat, .fact, .sg, .skill, .bv-skills span, .bv-proj, .ask, .chip, .table-scroll, .term-chips button {
+  transition: box-shadow .25s ease, transform .25s ease, border-color .25s ease, color .25s ease, background-color .25s ease;
+}
+.flow li:hover, .tags li:hover, .bv-stat:hover, .fact:hover, .skill:hover, .bv-skills span:hover, .bv-proj:hover, .ask:hover {
+  border-color: var(--mint); box-shadow: var(--glow-ring); transform: translateY(-2px); color: var(--text);
+}
+.flow li:hover { border-style: solid; background: color-mix(in srgb, var(--mint) 18%, transparent); }
+.tags li:hover { color: var(--mint); }
+.card:hover { border-color: color-mix(in srgb, var(--mint) 60%, var(--line)); box-shadow: 0 0 0 1px color-mix(in srgb, var(--mint) 25%, transparent), 0 20px 60px -30px color-mix(in srgb, var(--mint) 45%, transparent); }
+.sg:hover { border-color: color-mix(in srgb, var(--mint) 55%, var(--line)); box-shadow: 0 0 30px -12px color-mix(in srgb, var(--mint) 50%, transparent); }
+.stat:hover b { text-shadow: 0 0 22px color-mix(in srgb, var(--mint) 70%, transparent); }
+.stat b { transition: text-shadow .25s ease; }
+.chip:hover, .term-chips button:hover { box-shadow: 0 0 14px -2px color-mix(in srgb, var(--mint) 55%, transparent); }
+.btn:hover { box-shadow: 0 0 20px -4px color-mix(in srgb, var(--mint) 55%, transparent); }
+.btn { transition: box-shadow .25s ease, border-color .25s ease, filter .25s ease; }
+
+
+/* Analytics mini cards */
+.mini-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+@media (max-width: 860px) { .mini-grid { grid-template-columns: 1fr; } }
+.mini-grid > * { min-width: 0; }
+.card.mini { padding: clamp(1.1rem, 2.5vw, 1.5rem); }
+.mini-top { display: flex; justify-content: space-between; gap: 0.75rem; align-items: baseline; flex-wrap: wrap; }
+.mini-top h4 { margin: 0; font-size: 1.15rem; letter-spacing: -0.01em; }
+.mini-top .res { color: var(--mint); font-weight: 600; font-family: "JetBrains Mono", monospace; font-size: 0.85rem; white-space: nowrap; }
+.mini-one { color: var(--muted); margin: 0.35rem 0 0.9rem; }
+.card.mini ul.pts { margin: 0 0 1rem; padding-left: 1.1rem; font-size: 0.95rem; }
+.card.mini ul.pts li { margin-bottom: 0.4rem; }
+.card.mini ul.pts li::marker { color: var(--mint); }
+.brief .card.mini ul.pts { display: none; }
+
+
+/* Pillars band */
+.stats .wrap.pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding-block: 1.75rem; }
+@media (max-width: 860px) { .stats .wrap.pillars { grid-template-columns: 1fr; } }
+.pillar {
+  text-align: left; cursor: pointer; display: grid; align-content: start; gap: 0.35rem; padding: 1.25rem 1.3rem; border-radius: 14px;
+  border: 1px solid var(--line); background: var(--bg);
+  transition: box-shadow .25s ease, transform .25s ease, border-color .25s ease;
+}
+.pillar:hover { border-color: var(--mint); box-shadow: var(--glow-ring); transform: translateY(-2px); }
+.pillar .pi { width: 2.4rem; height: 2.4rem; border-radius: 10px; display: grid; place-items: center; background: var(--mint-soft); color: var(--mint); margin-bottom: 0.4rem; }
+.pillar .pi.v { background: var(--violet-soft); color: var(--violet); }
+.pillar .pi svg { width: 1.2rem; height: 1.2rem; }
+.pillar b { font-size: 1.25rem; letter-spacing: -0.01em; }
+.pillar .pd { color: var(--muted); }
+.pillar .pp { font-family: "JetBrains Mono", monospace; font-size: 0.78rem; color: var(--mint); margin-top: 0.3rem; }
+
+
+/* At-a-glance card */
+.glance { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 1.4rem; box-shadow: var(--shadow);
+  background-image: radial-gradient(ellipse 80% 60% at 100% 0%, var(--mint-soft), transparent 60%); }
+.g-top { display: flex; align-items: center; gap: 0.9rem; padding-bottom: 1.1rem; border-bottom: 1px solid var(--line); }
+.g-av { position: relative; width: 3.6rem; height: 3.6rem; border-radius: 50%; flex: none; background: var(--mint); color: var(--mint-ink);
+  display: grid; place-items: center; font-weight: 700; font-size: 1.15rem; overflow: hidden; border: 2px solid var(--mint); }
+.g-av img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.g-top b { display: block; font-size: 1.1rem; }
+.g-name span { color: var(--muted); font-size: 0.85rem; font-family: "JetBrains Mono", monospace; }
+.g-live { margin-left: auto; display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.78rem; font-family: "JetBrains Mono", monospace;
+  color: var(--mint); border: 1px solid color-mix(in srgb, var(--mint) 45%, transparent); background: var(--mint-soft); padding: 0.25rem 0.65rem; border-radius: 999px; white-space: nowrap; }
+.g-live i { width: 0.45rem; height: 0.45rem; border-radius: 50%; background: var(--mint); animation: pulse 2s infinite; }
+.g-list { margin: 0; padding: 0.4rem 0; }
+.g-list > div { display: grid; grid-template-columns: 7.5rem 1fr; gap: 0.75rem; padding: 0.65rem 0; border-bottom: 1px dashed var(--line); }
+.g-list dt { color: var(--muted); font-size: 0.85rem; font-family: "JetBrains Mono", monospace; padding-top: 0.1rem; }
+.g-list dd { margin: 0; font-weight: 500; }
+.g-list small { display: block; color: var(--muted); font-weight: 400; font-size: 0.85rem; }
+.g-tools { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1rem 0 1.1rem; }
+.g-tools span { font-family: "JetBrains Mono", monospace; font-size: 0.76rem; border: 1px solid var(--line); background: var(--surface-2); border-radius: 6px; padding: 0.2rem 0.55rem; color: var(--muted); }
+.g-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.g-actions .btn { flex: 1; justify-content: center; padding: 0.7rem 1rem; }
+.g-note { margin: 0.6rem 0 0; min-height: 1.2em; color: var(--mint); font-size: 0.88rem; }
+@media (max-width: 420px) { .g-list > div { grid-template-columns: 1fr; gap: 0.1rem; } .g-live { display: none; } }
+
+
+/* Filter ordering */
+.proj-list { display: flex; flex-direction: column; }
+.proj-list[data-f="analytics"] .more { order: -1; }
+.proj-list[data-f="analytics"] .more > h3 { margin-top: 0; }
+.proj-list[data-f="analytics"] .cards:first-child { margin-top: 1.25rem; }
+.more .cards { margin-top: 0; }
+.proj-list[data-f="data"] #p-lantern { order: -2; }
+.proj-list[data-f="data"] #p-orbit { order: -1; }
+.proj-list[data-f="data"] #p-health { order: -2; }
+.proj-list[data-f="data"] #p-dow30 { order: -1; }
+.proj-list[data-f="rag"] #p-lantern { order: -1; }
+.filter-note b { color: var(--mint); }
+
+/* Reveal */
+.js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+.js .reveal.in { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-gh" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.7.3 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/></symbol>
+  <symbol id="i-in" viewBox="0 0 24 24"><path fill="currentColor" d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6h.1c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.2ZM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2ZM7.1 20.5H3.5V9h3.6v11.5ZM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0Z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 5h18v14H3zM3 6l9 7 9-7"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+  <symbol id="i-agent" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4M9 14h.01M15 14h.01"/><circle cx="12" cy="3" r="1"/></g></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 13h6M9 17h6"/></g></symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M16 13h.01M3 10h18M7 6V4h10v2"/></g></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4zM20 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z"/></g></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10Z"/></symbol>
+  <symbol id="i-cmd" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M9 6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3z"/></symbol>
+  <symbol id="i-grad" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></g></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-redo" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 12a8 8 0 1 0 2.3-5.7M4 4v4h4"/></symbol>
+  <symbol id="i-briefcase" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V4h6v3M3 13h18"/></g></symbol>
+</svg>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="logo" href="#top">RK<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Projects</a></li>
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-tools">
+      <div class="mode" role="group" aria-label="Reading mode">
+        <button type="button" data-mode="brief" aria-pressed="false" title="Short version for a quick scan">⚡ 30-sec</button>
+        <button type="button" data-mode="deep" aria-pressed="true" title="Full case studies">Deep dive</button>
+      </div>
+      <button class="icon-btn" type="button" id="theme" aria-label="Switch to light mode"><svg><use href="#i-sun"/></svg></button>
+      <a class="resume-link" href="Riya_Kapadnis_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+    </div>
+  </div>
+</nav>
+
+
+<section class="brief-view" id="brief-view" aria-label="30-second summary">
+  <div class="wrap">
+    <p class="bv-kicker">⚡ 30-sec view</p>
+    <h1>Riya Kapadnis</h1>
+    <p class="bv-role" id="bv-role">AI Engineer · Data Engineer · Data Analyst</p>
+    <p class="bv-status"><svg><use href="#i-briefcase"/></svg>Recent AI Engineer co-op @ TwinAI · MS Information Systems, Northeastern (Dec 2026) · Open to full-time AI, data engineering and analytics roles in Boston, MA</p>
+    <div class="bv-stats">
+      <div class="bv-stat"><b>AI engineering</b><span>LLM apps, RAG, and multi-agent workflows in production</span></div>
+      <div class="bv-stat"><b>Data engineering</b><span>Airflow pipelines, cloud warehouses, data quality</span></div>
+      <div class="bv-stat"><b>Analytics</b><span>SQL, statistics, and dashboards for business decisions</span></div>
+    </div>
+    <div class="bv-grid">
+      <div>
+        <p class="bv-label">Top projects</p>
+        <div class="bv-projects" id="bv-projects">
+          <button class="bv-proj" type="button" data-go="p-genbi"><svg><use href="#i-chart"/></svg><div><b>GenBI</b> <span>· Upload a spreadsheet, get charts, KPIs, and insights. No SQL.</span><em>Industry project @ TwinAI · see the case study</em></div></button>
+          <button class="bv-proj" type="button" data-go="p-orbit"><svg><use href="#i-agent"/></svg><div><b>ORBIT</b> <span>· Agentic due-diligence dashboards for the Forbes AI 50.</span><em>Airflow, MCP tools, RAG, GCP · see the case study</em></div></button>
+          <button class="bv-proj" type="button" data-go="p-expense"><svg><use href="#i-wallet"/></svg><div><b>Smart Expense Analyzer</b> <span>· A 3-agent assistant that finds forgotten subscriptions.</span><em>Google ADK, Gemini, Cloud Run · see the case study</em></div></button>
+        </div>
+      </div>
+      <div>
+        <p class="bv-label">Key skills</p>
+        <div class="bv-skills"><span>Python</span><span>SQL</span><span>LLMs / RAG</span><span>Azure OpenAI</span><span>Gemini</span><span>Airflow</span><span>PostgreSQL</span><span>FastAPI</span><span>GCP</span><span>Power BI</span></div>
+      </div>
+    </div>
+    <div class="cta">
+      <a class="btn primary" href="mailto:kapadnis.ri@northeastern.edu"><svg width="18" height="18"><use href="#i-mail"/></svg>Email me</a>
+      <a class="btn" href="https://www.linkedin.com/in/riya-kapadnis-8957491ba/" target="_blank" rel="noopener"><svg width="18" height="18"><use href="#i-in"/></svg>LinkedIn</a>
+      <a class="btn" href="Riya_Kapadnis_Resume.pdf" target="_blank" rel="noopener">View resume</a>
+      <a class="btn" href="https://github.com/riyask29" target="_blank" rel="noopener"><svg width="18" height="18"><use href="#i-gh"/></svg>GitHub</a>
+    </div>
+  </div>
+</section>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <p class="hello">Hi 👋, I'm</p>
+      <div class="who">
+        <h1>Riya Kapadnis</h1>
+      </div>
+      <p class="typed">I build <span class="rot" id="rot">data pipelines that answer questions</span><span class="caret" aria-hidden="true"></span></p>
+      <p class="tagline" id="role-line">AI Engineer · Data Engineer · Data Analyst</p>
+      <p class="tools-line" id="tools-line">LLMs and RAG · Airflow pipelines · SQL and Power BI</p>
+      <p class="intro">I turn messy data into answers people can act on, whether that takes an AI product, a data pipeline, or a dashboard.</p>
+      <div class="cta">
+        <a class="btn primary" href="#work">View projects ↓</a>
+        <a class="btn" href="#contact">Get in touch</a>
+        <div class="socials">
+          <a href="https://github.com/riyask29" target="_blank" rel="noopener" aria-label="GitHub"><svg><use href="#i-gh"/></svg></a>
+          <a href="https://www.linkedin.com/in/riya-kapadnis-8957491ba/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg><use href="#i-in"/></svg></a>
+          <a href="mailto:kapadnis.ri@northeastern.edu" aria-label="Email"><svg><use href="#i-mail"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <aside class="glance" aria-label="At a glance">
+      <div class="g-top">
+        <div class="g-av"><span aria-hidden="true">RK</span><img src="riya.jpg" alt="Riya Kapadnis" hidden onload="this.hidden=false"></div>
+        <div class="g-name"><b>Riya Kapadnis</b><span>At a glance</span></div>
+        <span class="g-live"><i></i>Open to work</span>
+      </div>
+      <dl class="g-list">
+        <div><dt>Most recent</dt><dd>AI Engineer co-op, TwinAI <small>Jan 2026 – Jun 2026</small></dd></div>
+        <div><dt>Education</dt><dd>MS Information Systems, Northeastern <small>Graduating Dec 2026</small></dd></div>
+        <div><dt>Looking for</dt><dd id="g-looking">Full-time AI Engineer, Data Engineer, or Data Analyst roles</dd></div>
+        <div><dt>Available</dt><dd>From December 2026</dd></div>
+        <div><dt>Based in</dt><dd>Boston, MA</dd></div>
+      </dl>
+      <div class="g-tools"><span>Python</span><span>SQL</span><span>LLMs / RAG</span><span>Airflow</span><span>Power BI</span><span>GCP</span></div>
+      <div class="g-actions">
+        <a class="btn primary" href="Riya_Kapadnis_Resume.pdf" target="_blank" rel="noopener">View resume</a>
+        <button class="btn" type="button" id="g-copy">Copy email</button>
+      </div>
+      <p class="g-note" id="g-note" aria-live="polite"></p>
+    </aside>
+  </div>
+</header>
+
+<div class="stats" aria-label="What I do">
+  <div class="wrap pillars" id="pillars">
+    <button class="pillar" type="button" data-pillar="genai">
+      <span class="pi"><svg><use href="#i-agent"/></svg></span>
+      <b>AI engineering</b>
+      <span class="pd">LLM apps, RAG, and multi-agent workflows taken to production.</span>
+      <span class="pp">GenBI · ORBIT · Smart Expense · AURELIA</span>
+    </button>
+    <button class="pillar" type="button" data-pillar="data">
+      <span class="pi v"><svg><use href="#i-doc"/></svg></span>
+      <b>Data engineering</b>
+      <span class="pd">Airflow pipelines, cloud warehouses, and data quality checks.</span>
+      <span class="pp">LANTERN · ORBIT · Health Insurance · Dow 30</span>
+    </button>
+    <button class="pillar" type="button" data-pillar="analytics">
+      <span class="pi"><svg><use href="#i-chart"/></svg></span>
+      <b>Analytics</b>
+      <span class="pd">SQL, statistics, and dashboards that change business decisions.</span>
+      <span class="pp">Supermarket · Global Trade · AgriGain</span>
+    </button>
+  </div>
+</div>
+
+<main>
+<section class="sec" id="about" aria-labelledby="about-h">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="kicker">01 / about</p>
+      <h2 id="about-h">About me</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p class="lead">Most people sitting on data don't have a data team. They have a spreadsheet, a question, and no time to learn SQL. That gap is what I like working on.</p>
+        <p class="deep">I've spent 2+ years turning sales, supply chain, and customer data into decisions. At AgriGain Alliance I was the person in the middle, digging into supply chain and ERP data for pricing, distribution, and sales trends, building Python and Airflow pipelines to clean it, then Power BI dashboards that helped cut marketing costs by 17% and lift sales by 20%. The dashboard was the easy part. Getting to the right question was the hard part.</p>
+        <p class="deep">So at TwinAI I built the thing I wished we'd had: GenBI, where you upload a file and get charts, KPIs, and written insights back with no SQL. Now I build RAG systems, multi-agent workflows, and LLM analytics products, and I care just as much about the unglamorous parts: clean data, validation, evaluation, and getting it deployed.</p>
+      </div>
+      <div class="facts reveal">
+        <div class="fact"><span class="ic"><svg><use href="#i-briefcase"/></svg></span><div><b>AI Engineer co-op, TwinAI</b><span>Built GenBI from prototype to deployed product</span></div></div>
+        <div class="fact"><span class="ic v"><svg><use href="#i-grad"/></svg></span><div><b>MS Information Systems, Northeastern</b><span>Graduating December 2026</span></div></div>
+        <div class="fact"><span class="ic"><svg><use href="#i-spark"/></svg></span><div><b>Looking for full-time roles</b><span>AI Engineer, Data Engineer, Data Analyst</span></div></div>
+        <div class="fact"><span class="ic v"><svg><use href="#i-pin"/></svg></span><div><b>Boston, MA</b><span>Pune → Nashik → Boston</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="work" aria-labelledby="work-h" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="kicker">02 / featured projects</p>
+      <h2 id="work-h">Things I've built (and debugged at midnight)</h2>
+      <p>Each pipeline shows the whole system, with <span style="color:var(--mint)">the steps I built highlighted</span>. In a hurry? Switch to ⚡ 30-sec at the top.</p>
+    </div>
+    <div class="filters" role="group" aria-label="Filter projects">
+      <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+      <button class="chip" type="button" data-filter="genai" aria-pressed="false">GenAI and agents</button>
+      <button class="chip" type="button" data-filter="rag" aria-pressed="false">RAG</button>
+      <button class="chip" type="button" data-filter="data" aria-pressed="false">Data engineering</button>
+      <button class="chip" type="button" data-filter="analytics" aria-pressed="false">Analytics</button>
+    </div>
+    <p class="filter-note" id="filter-note" aria-live="polite"></p>
+
+    <div class="proj-list" id="proj-list" data-f="all">
+    <div class="cards">
+      <article id="p-genbi" class="card reveal" data-cat="genai data analytics">
+        <div class="card-top"><span class="card-ic"><svg><use href="#i-chart"/></svg></span><span class="badge ind">Industry project @ TwinAI</span></div>
+        <h3>GenBI: AI analytics from a spreadsheet</h3>
+        <p class="one">Upload a spreadsheet, get charts, KPIs, and insights. No SQL.</p>
+        <div class="tryit deep">
+          <div>
+            <p class="ask-label">Try it: ask the sample data a question</p>
+            <div class="asks" role="group" aria-label="Sample questions">
+              <button class="ask" type="button" data-q="growth" aria-pressed="false">Which month grew fastest?</button>
+              <button class="ask" type="button" data-q="best" aria-pressed="false">What was the best month?</button>
+              <button class="ask" type="button" data-q="total" aria-pressed="false">What's the total for the half year?</button>
+            </div>
+          </div>
+          <div class="sheet" aria-live="polite">
+            <div class="sheet-fx"><span>fx</span><span class="f" id="fx">=ASK(B2:B7, "…")</span></div>
+            <div class="sheet-body">
+              <table id="sheet-t">
+                <tr class="head"><td>Month</td><td class="n">Revenue</td></tr>
+                <tr><td>Jan</td><td class="n">42,100</td></tr>
+                <tr><td>Feb</td><td class="n">47,300</td></tr>
+                <tr><td>Mar</td><td class="n">45,000</td></tr>
+                <tr><td>Apr</td><td class="n">62,100</td></tr>
+                <tr><td>May</td><td class="n">66,400</td></tr>
+                <tr><td>Jun</td><td class="n">71,000</td></tr>
+              </table>
+              <svg viewBox="0 0 200 150" aria-hidden="true" id="sheet-c">
+                <rect class="bar" x="8" y="70.7" width="22" height="59.3"/><rect class="bar" x="40" y="63.4" width="22" height="66.6"/>
+                <rect class="bar" x="72" y="66.6" width="22" height="63.4"/><rect class="bar" x="104" y="42.5" width="22" height="87.5"/>
+                <rect class="bar" x="136" y="36.5" width="22" height="93.5"/><rect class="bar" x="168" y="30" width="22" height="100"/>
+                <text class="lbl" x="19" y="144" text-anchor="middle">Jan</text><text class="lbl" x="51" y="144" text-anchor="middle">Feb</text>
+                <text class="lbl" x="83" y="144" text-anchor="middle">Mar</text><text class="lbl" x="115" y="144" text-anchor="middle">Apr</text>
+                <text class="lbl" x="147" y="144" text-anchor="middle">May</text><text class="lbl" x="179" y="144" text-anchor="middle">Jun</text>
+              </svg>
+            </div>
+            <div class="sheet-ans" id="ans">Pick a question and GenBI answers it.</div>
+          </div>
+        </div>
+        <ol class="flow" aria-label="GenBI pipeline, all steps built by me">
+          <li class="mine">CSV or Excel upload</li><li class="mine">Column profiling</li><li class="mine">LLM chart picker</li><li class="mine">Gemini Key Influencers</li><li class="mine">Charts, KPIs, insights</li>
+        </ol>
+        <dl class="story deep">
+          <div><dt>Problem</dt><dd>Business users have data in CSV and Excel files but can't write SQL or build dashboards, so their questions wait on an analyst.</dd></div>
+          <div><dt>What I built</dt><dd>Azure OpenAI picks the right chart from 14 types across 6 families. Google Gemini explains which factors actually move each KPI. A Python profiling step (type, cardinality, distribution, correlation) grounds the model's choices.</dd></div>
+          <div><dt>Shipped</dt><dd>Taken from prototype to a deployed product with a Flask and PostgreSQL backend, dual Azure auth, and Stripe billing with signed webhooks.</dd></div>
+        </dl>
+        <ul class="tags"><li>Azure OpenAI</li><li>Google Gemini</li><li>Python</li><li>Flask</li><li>PostgreSQL</li><li>SQLAlchemy</li><li>Prompt engineering</li><li>Stripe</li></ul>
+      </article>
+
+      <article id="p-orbit" class="card reveal" data-cat="genai rag data">
+        <div class="card-top"><span class="card-ic"><svg><use href="#i-agent"/></svg></span><span class="badge">Team of 3 · Northeastern</span></div>
+        <h3>ORBIT: private equity intelligence platform</h3>
+        <p class="one">Agentic due-diligence dashboards for the Forbes AI 50, refreshed daily.</p>
+        <p class="mypart"><b>My part:</b> the data foundation and the agent layer. I built the scrapers, GCP storage, and both Airflow DAGs for full and daily loads, then the MCP tools and supervisor agent that let other AI agents query the platform, and the deployment on GCP.</p>
+        <ol class="flow" aria-label="ORBIT pipeline">
+          <li class="mine">Web scraping</li><li class="mine">GCS storage</li><li class="mine">Airflow DAGs</li><li>RAG and extraction</li><li class="mine">MCP tools and agent</li><li class="mine">Deploy on GCP</li>
+        </ol>
+        <dl class="story deep">
+          <div><dt>Problem</dt><dd>Investors researching the Forbes AI 50 piece together funding, hiring, product, and risk signals from dozens of scattered pages.</dd></div>
+          <div><dt>Result</dt><dd>Dashboards for 47 companies, with RAG search answering in about 500 ms per query.</dd></div>
+        </dl>
+        <ul class="tags"><li>Airflow</li><li>GCP</li><li>MCP</li><li>RAG</li><li>ChromaDB</li><li>FastAPI</li><li>Streamlit</li><li>Docker</li></ul>
+        <div class="card-links"><a href="https://github.com/riyask29/pe-dashboard-ai50-v3" target="_blank" rel="noopener"><svg><use href="#i-gh"/></svg>Code on GitHub</a></div>
+      </article>
+
+      <article id="p-expense" class="card reveal" data-cat="genai data">
+        <div class="card-top"><span class="card-ic"><svg><use href="#i-wallet"/></svg></span><span class="badge">Team of 3 · Northeastern</span></div>
+        <h3>Smart Expense Analyzer: multi-agent budget assistant</h3>
+        <p class="one">Finds the subscriptions you forgot about and tells you where to save.</p>
+        <p class="mypart"><b>My part:</b> the core intelligence and shipping it. I built the 3-agent workflow in Google ADK with Gemini tools, parallel runs, retries, and monitoring, the prompt guardrails that kept outputs consistent, and the deployment on Cloud Run with Cloud SQL.</p>
+        <ol class="flow" aria-label="Smart Expense pipeline">
+          <li>Bank transactions</li><li>ETL to PostgreSQL</li><li class="mine">3-agent ADK workflow</li><li class="mine">Guardrails and eval</li><li class="mine">Cloud Run deploy</li>
+        </ol>
+        <dl class="story deep">
+          <div><dt>Problem</dt><dd>People lose money to forgotten subscriptions and spending patterns they never notice in their statements.</dd></div>
+          <div><dt>Result</dt><dd>Consistent, structured savings recommendations across runs, checked with precision and recall.</dd></div>
+        </dl>
+        <ul class="tags"><li>Google ADK</li><li>Gemini</li><li>FastAPI</li><li>Streamlit</li><li>Cloud Run</li><li>Cloud SQL</li></ul>
+        <div class="card-links"><a href="https://github.com/riyask29/smart-expense-agent" target="_blank" rel="noopener"><svg><use href="#i-gh"/></svg>Code on GitHub</a></div>
+      </article>
+
+      <article id="p-lantern" class="card reveal" data-cat="rag data">
+        <div class="card-top"><span class="card-ic"><svg><use href="#i-doc"/></svg></span><span class="badge">Team of 3 · Northeastern</span></div>
+        <h3>LANTERN: SEC filing document intelligence</h3>
+        <p class="one">Airflow ELT pipelines on GCP that parse and validate thousands of SEC 10-K and 10-Q filings into traceable, governance-ready data an LLM can answer questions from.</p>
+        <p class="mypart"><b>My part:</b> data quality and evaluation. I built the parsing-quality and regression tests that compared extraction methods and output formats to decide which parser to trust, designed the data quality controls, integrated Azure AI parsing, and wrote the lineage and pipeline documentation so every value has clear provenance.</p>
+        <ol class="flow" aria-label="LANTERN pipeline">
+          <li>EDGAR download</li><li>pdfplumber, Camelot, Docling</li><li class="mine">Azure AI parsing</li><li>XBRL validation</li><li class="mine">Evaluation and regression</li>
+        </ol>
+        <dl class="story deep">
+          <div><dt>Problem</dt><dd>Filings bury the numbers analysts need in long PDFs full of tables, and PDF parsers often get those tables wrong.</dd></div>
+        </dl>
+        <ul class="tags"><li>Python</li><li>Airflow</li><li>GCP</li><li>Azure AI</li><li>XBRL</li><li>DVC</li><li>GitHub Actions</li></ul>
+        <div class="card-links"><a href="https://github.com/riyask29/pdf-parser-pro" target="_blank" rel="noopener"><svg><use href="#i-gh"/></svg>Code on GitHub</a></div>
+      </article>
+
+      <article id="p-aurelia" class="card reveal" data-cat="genai rag">
+        <div class="card-top"><span class="card-ic"><svg><use href="#i-book"/></svg></span><span class="badge">Team of 3 · Northeastern</span></div>
+        <h3>AURELIA: financial concept note generator</h3>
+        <p class="one">A RAG service that writes cited finance concept notes on demand.</p>
+        <p class="mypart"><b>My part:</b> the product layer people actually use. I built the FastAPI service that serves and caches concept notes, and the Streamlit app on top of it.</p>
+        <ol class="flow" aria-label="AURELIA pipeline">
+          <li>Parse and chunk PDFs</li><li>Pinecone and ChromaDB</li><li>Wikipedia fallback</li><li class="mine">FastAPI service</li><li class="mine">Streamlit app</li>
+        </ol>
+        <dl class="story deep">
+          <div><dt>Problem</dt><dd>Generic chatbots explain finance concepts without sources. AURELIA cites the page and section, and falls back to Wikipedia when the PDFs don't cover a topic.</dd></div>
+        </dl>
+        <ul class="tags"><li>FastAPI</li><li>Streamlit</li><li>LangChain</li><li>Pinecone</li><li>ChromaDB</li><li>PostgreSQL</li></ul>
+        <div class="card-links"><a href="https://github.com/riyask29/Aurelia_RAG" target="_blank" rel="noopener"><svg><use href="#i-gh"/></svg>Code on GitHub</a></div>
+      </article>
+    </div>
+
+    <div class="more">
+      <h3 class="reveal">Analytics and data projects</h3>
+      <div class="cards">
+        <article id="p-supermarket" class="card reveal" data-cat="analytics">
+          <div class="card-top"><span class="card-ic"><svg><use href="#i-wallet"/></svg></span><span class="badge">Solo project</span></div>
+          <h3>Supermarket algorithmic marketing</h3>
+          <p class="one">Customer segmentation and promotion insights from 10M+ retail transactions.</p>
+          <ol class="flow" aria-label="Supermarket algorithmic marketing pipeline">
+            <li class="mine">10M+ transactions in Snowflake</li><li class="mine">SQL and Python cleaning</li><li class="mine">Scikit-learn clustering</li><li class="mine">Cohort KPIs in Power BI</li><li class="mine">Assortment and promotion ideas</li>
+          </ol>
+          <dl class="story deep">
+            <div><dt>Problem</dt><dd>Retail transaction data hides which customers are worth targeting and which promotions actually work.</dd></div>
+            <div><dt>What I did</dt><dd>Processed 10M+ retail transactions in Snowflake with SQL and Python, then used Scikit-learn clustering to segment customers by purchasing behavior, finding high-value cohorts and promotional response patterns across categories. I tracked cohort KPIs (purchase frequency, basket size, category penetration) in Power BI and a Streamlit dashboard on AWS EC2, turned them into assortment and promotion recommendations, and documented data quality rules and dimensional schema definitions for self-serve, governance-ready reporting.</dd></div>
+            <div><dt>Result</dt><dd>Forecasting models for inventory planning improved product availability by 12%.</dd></div>
+          </dl>
+          <ul class="tags"><li>Snowflake</li><li>SQL</li><li>Python</li><li>Scikit-learn</li><li>Power BI</li><li>Streamlit</li></ul>
+        </article>
+        <article id="p-health" class="card reveal" data-cat="analytics data">
+          <div class="card-top"><span class="card-ic"><svg><use href="#i-doc"/></svg></span><span class="badge">Solo project</span></div>
+          <h3>U.S. health insurance program</h3>
+          <p class="one">Auditable claims KPIs from 12M+ multi-source government records.</p>
+          <ol class="flow" aria-label="U.S. health insurance program pipeline">
+            <li class="mine">Multi-source government data</li><li class="mine">Talend ETL</li><li class="mine">BigQuery reconciliation, 12M+ rows</li><li class="mine">Quality rules and lineage</li><li class="mine">Looker and Power BI KPIs</li>
+          </ol>
+          <dl class="story deep">
+            <div><dt>Problem</dt><dd>Claims data from several government sources did not line up, so KPIs like Medical Loss Ratio were hard to trust.</dd></div>
+            <div><dt>What I did</dt><dd>Reconciled 12M+ health insurance records in BigQuery across multi-source government data, transforming them with Talend ETL. I documented quality rules, source-to-target mappings, metric definitions, data lineage, and quality thresholds so the reporting is consistent, auditable, and reproducible.</dd></div>
+            <div><dt>Result</dt><dd>Reusable, parameterized Looker and Power BI dashboards for Medical Loss Ratio, Claim Settlement Cycle, and Claim Loss Ratio made reporting 35% more efficient and self-serve for business teams.</dd></div>
+          </dl>
+          <ul class="tags"><li>BigQuery</li><li>Talend</li><li>Looker</li><li>Power BI</li><li>GCP</li></ul>
+        </article>
+        <article id="p-trade" class="card reveal" data-cat="analytics">
+          <div class="card-top"><span class="card-ic"><svg><use href="#i-chart"/></svg></span><span class="badge">Solo project</span></div>
+          <h3>Global trade and tariff analysis</h3>
+          <p class="one">Forecasting how tariffs affect U.S. import volumes.</p>
+          <ol class="flow" aria-label="Global trade and tariff analysis pipeline">
+            <li class="mine">1M+ WITS and UN Comtrade records</li><li class="mine">Pandas cleaning and EDA</li><li class="mine">Regression and Bayesian models</li><li class="mine">Assumption checks</li><li class="mine">Power BI dashboards and reports</li>
+          </ol>
+          <dl class="story deep">
+            <div><dt>Problem</dt><dd>How do tariff changes affect U.S. import volumes, and how sure can we be?</dd></div>
+            <div><dt>What I did</dt><dd>Applied regression and Bayesian models (PyMC, Statsmodels) in Python and R to 1M+ international trade records from 2012 to 2022. I validated model assumptions and documented the full methodology before drawing conclusions, then produced Power BI dashboards and executive reports that turned the statistics into planning recommendations for two different non-technical audiences.</dd></div>
+            <div><dt>Result</dt><dd>R² = 0.82, with forecast uncertainty quantified.</dd></div>
+          </dl>
+          <ul class="tags"><li>Python</li><li>R</li><li>PyMC</li><li>Statsmodels</li><li>Pandas</li><li>Power BI</li></ul>
+        </article>
+        <article id="p-goodreads" class="card reveal" data-cat="data analytics">
+          <div class="card-top"><span class="card-ic"><svg><use href="#i-book"/></svg></span><span class="badge">Solo project</span></div>
+          <h3>Goodreads data pipeline</h3>
+          <p class="one">Reader engagement trends from the Goodreads API, refreshed daily.</p>
+          <ol class="flow" aria-label="Goodreads data pipeline pipeline">
+            <li class="mine">Goodreads APIs</li><li class="mine">Daily Airflow ETL</li><li class="mine">AWS Redshift</li><li class="mine">Tableau dashboards</li>
+          </ol>
+          <dl class="story deep">
+            <div><dt>Problem</dt><dd>Tracking what readers engage with means pulling fresh API data every day.</dd></div>
+            <div><dt>What I did</dt><dd>Collected reader engagement data through the Goodreads APIs, automated daily extract, transform, and load workflows in Airflow, and stored structured datasets in AWS Redshift.</dd></div>
+            <div><dt>Result</dt><dd>Tableau dashboards for top genres, reader activity trends, and engagement metrics that update automatically.</dd></div>
+          </dl>
+          <ul class="tags"><li>Python</li><li>Airflow</li><li>Redshift</li><li>Tableau</li></ul>
+        </article>
+        <article id="p-dow30" class="card reveal" data-cat="data">
+          <div class="card-top"><span class="card-ic"><svg><use href="#i-doc"/></svg></span><span class="badge">Team of 3 · Northeastern</span></div>
+          <h3>Dow 30 earnings pipeline</h3>
+          <p class="one">Finds, downloads, and parses every Dow 30 earnings report, with no manual collection.</p>
+          <p class="mypart"><b>My part:</b> PDF parsing with Docling, the Google Cloud Storage integration, and testing.</p>
+          <ol class="flow" aria-label="Dow 30 earnings pipeline pipeline">
+            <li>Investor relations page discovery</li><li>Report download</li><li class="mine">Docling PDF parsing</li><li class="mine">Google Cloud Storage</li><li>Airflow orchestration</li>
+          </ol>
+          <dl class="story deep">
+            <div><dt>Problem</dt><dd>Analysts collect quarterly earnings reports for 30 companies by hand from different investor relations sites.</dd></div>
+          </dl>
+          <ul class="tags"><li>Airflow</li><li>Docling</li><li>GCS</li><li>Python</li></ul>
+          <div class="card-links"><a href="https://github.com/riyask29/automated-dow30-earnings-reports" target="_blank" rel="noopener"><svg><use href="#i-gh"/></svg>Code on GitHub</a></div>
+        </article>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="journey" aria-labelledby="journey-h" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="kicker">03 / journey</p>
+      <h2 id="journey-h">How I got here</h2>
+    </div>
+    <p class="route"><b>Boston</b> ← <b>Nashik</b> ← <b>Pune</b> <span style="opacity:.7">(newest first)</span></p>
+    <ol class="chapters">
+      <li class="chapter reveal">
+        <span class="pin"><svg><use href="#i-spark"/></svg></span>
+        <p class="ch">2026 · teaching data to talk back</p>
+        <h3>AI Engineer Co-op · TwinAI Inc.</h3>
+        <p class="where">Boston, MA · <span class="mono">Jan 2026 – Jun 2026</span></p>
+        <ul class="pts deep">
+          <li>Built GenBI, a self-serve AI analytics platform that turns a CSV or Excel upload into automated data profiling reports, charts, KPIs, and written insights</li>
+          <li>Wired up Azure OpenAI to pick charts from 14 types across 6 families, and Google Gemini for Key Influencers analysis</li>
+          <li>Analyzed product feature adoption and output quality metrics in Python, and presented evidence-based recommendations to technical and non-technical stakeholders at each sprint review</li>
+          <li>Gathered requirements from cross-functional product and engineering stakeholders and documented business needs and acceptance criteria</li>
+          <li>Automated data quality audits in Python with documented testing assumptions and quality thresholds, cutting rework across the delivery cycle</li>
+          <li>Modeled the PostgreSQL schema with SQLAlchemy and Alembic, and shipped with dual Azure auth and Stripe billing</li>
+        </ul>
+        <ul class="tags"><li>Azure OpenAI</li><li>Gemini</li><li>Flask</li><li>PostgreSQL</li></ul>
+      </li>
+      <li class="chapter reveal">
+        <span class="pin"><svg><use href="#i-grad"/></svg></span>
+        <p class="ch">2024 · leveling up</p>
+        <h3>MS Information Systems · Northeastern University</h3>
+        <p class="where">Boston, MA · <span class="mono">Sep 2024 – Dec 2026</span></p>
+        <ul class="pts deep">
+          <li>Coursework: Data Management and Database Design, Data Science, Applied Statistics, Big Data, Agile, Business Process Engineering</li>
+          <li>Built ORBIT, Smart Expense Analyzer, LANTERN, and AURELIA with a team of three</li>
+        </ul>
+      </li>
+      <li class="chapter reveal">
+        <span class="pin"><svg><use href="#i-pin"/></svg></span>
+        <p class="ch">2023 · real business impact</p>
+        <h3>Data Analyst · AgriGain Alliance</h3>
+        <p class="where">Nashik, India · <span class="mono">Aug 2023 – Aug 2024</span></p>
+        <ul class="pts deep">
+          <li>Examined supply chain and ERP datasets with SQL and Python to surface pricing, distribution, and sales trends</li>
+          <li>Built Power BI dashboards for executive stakeholders that cut marketing costs by 17% and lifted sales by 20%</li>
+          <li>Automated ETL pipelines in Python and Airflow, pulling multi-source data into analytics-ready datasets</li>
+          <li>Standardized data preparation workflows across the analytics team and documented data definitions and quality standards, improving reliability by 25%</li>
+          <li>Ran EDA in PostgreSQL and Python that cut decision cycles by 12%</li>
+        </ul>
+        <ul class="tags"><li>SQL</li><li>Python</li><li>Airflow</li><li>PostgreSQL</li><li>Power BI</li><li>ERP data</li></ul>
+      </li>
+      <li class="chapter reveal">
+        <span class="pin"><svg><use href="#i-pin"/></svg></span>
+        <p class="ch">2022 · falling for data</p>
+        <h3>Data Analyst Intern · Swastish Enterprises</h3>
+        <p class="where">Pune, India · <span class="mono">Apr 2022 – Aug 2022</span></p>
+        <ul class="pts deep">
+          <li>Queried a Teradata data warehouse with SQL to extract and prepare structured data for business reporting</li>
+          <li>Automated data-quality checks and root-cause analysis in Python, cutting manual effort by 30%</li>
+          <li>Built Tableau dashboards for compliance and performance KPIs</li>
+        </ul>
+        <ul class="tags"><li>Teradata</li><li>SQL</li><li>Python</li><li>Tableau</li></ul>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" id="skills" aria-labelledby="skills-h" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="kicker">04 / skills</p>
+      <h2 id="skills-h">My toolbox</h2>
+    </div>
+    <p class="skill-hint">Click any skill to see the projects where I used it.</p>
+    <div class="skill-groups reveal">
+      <div class="sg"><h3>AI and LLMs</h3><div class="list">
+        <button class="skill">Python</button><button class="skill">Azure OpenAI</button><button class="skill">Gemini</button><button class="skill">RAG</button><button class="skill">LangChain</button><button class="skill" data-q="Google ADK|MCP">AI agents (ADK, MCP)</button><button class="skill">Prompt engineering</button><button class="skill" data-q="Pinecone|ChromaDB">Vector DBs</button>
+      </div></div>
+      <div class="sg"><h3>Data engineering</h3><div class="list">
+        <button class="skill">SQL</button><button class="skill">Airflow</button><button class="skill" data-q="ETL|ELT">ETL / ELT</button><button class="skill">Snowflake</button><button class="skill">BigQuery</button><button class="skill">PostgreSQL</button><button class="skill">Docker</button><button class="skill">Data quality</button>
+      </div></div>
+      <div class="sg"><h3>Analytics and BI</h3><div class="list">
+        <button class="skill">Power BI</button><button class="skill">Tableau</button><button class="skill" data-q="Excel|Pivot">Excel</button><button class="skill">Looker</button><button class="skill" data-q="Python">Pandas</button><button class="skill" data-q="Regression|Bayesian|Statsmodels">Statistics</button><button class="skill" data-q="segment">Customer segmentation</button><button class="skill" data-q="dashboard">Dashboards and KPIs</button>
+      </div></div>
+      <div class="sg"><h3>Cloud and dev tools</h3><div class="list">
+        <button class="skill" data-q="AWS|Redshift|EC2">AWS</button><button class="skill" data-q="GCP|Cloud Run|BigQuery">GCP</button><button class="skill" data-q="Azure">Azure</button><button class="skill">FastAPI</button><button class="skill">Streamlit</button><button class="skill" data-q="GitHub">Git</button><button class="skill">GitHub Actions</button><button class="skill">Docker</button>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="contact" aria-labelledby="contact-h" style="padding-top:0">
+  <div class="wrap">
+    <div class="contact-box reveal">
+      <p class="kicker">05 / contact</p>
+      <h2 id="contact-h">Let's build something that answers real questions.</h2>
+      <p>I'm graduating in December 2026 and looking for full-time AI Engineer, Data Engineer, and Data Analyst roles. The fastest way to reach me is email.</p>
+      <div class="cta">
+        <button class="btn primary" type="button" id="copy-email">Copy my email</button>
+        <a class="btn" href="mailto:kapadnis.ri@northeastern.edu">kapadnis.ri@northeastern.edu</a>
+        <a class="btn" href="Riya_Kapadnis_Resume.pdf" target="_blank" rel="noopener">View resume</a>
+        <span class="copied" id="copied" aria-live="polite"></span>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Riya Kapadnis · Boston, MA</span>
+    <span>Updated October 2026</span>
+  </div>
+</footer>
+
+
+<button class="chat-fab" type="button" id="chat-fab" aria-expanded="false" aria-controls="chat"><svg><use href="#i-chat"/></svg><span>Ask Riya</span></button>
+<div class="chat" id="chat" role="dialog" aria-label="Ask Riya" hidden>
+  <div class="chat-head">
+    <span class="chat-av" aria-hidden="true">RK</span>
+    <div><b>Ask Riya</b><small>quick answers · written by me</small></div>
+    <div class="tools">
+      <button type="button" id="chat-reset" aria-label="Start over"><svg><use href="#i-redo"/></svg></button>
+      <button type="button" id="chat-close" aria-label="Close chat"><svg><use href="#i-x"/></svg></button>
+    </div>
+  </div>
+  <div class="chat-log" id="chat-log" aria-live="polite"></div>
+  <div class="chat-qs" id="chat-qs" aria-label="Suggested questions"></div>
+  <form class="chat-form" id="chat-form" autocomplete="off">
+    <input id="chat-input" type="text" placeholder="Or type a question…" aria-label="Type a question">
+    <button type="submit">Ask</button>
+  </form>
+</div>
+
+
+
+<script>
+(function () {
+  var root = document.documentElement;
+  root.classList.add('js');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var EMAIL = 'kapadnis.ri@northeastern.edu';
+  var RESUME = 'Riya_Kapadnis_Resume.pdf';
+
+  /* Theme */
+  var themeBtn = document.getElementById('theme');
+  function syncThemeBtn() {
+    var dark = root.getAttribute('data-theme') !== 'light';
+    themeBtn.innerHTML = '<svg><use href="#i-' + (dark ? 'sun' : 'moon') + '"/></svg>';
+    themeBtn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+  }
+  themeBtn.addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('rk-theme', next); } catch (e) {}
+    syncThemeBtn();
+  if (window.matchMedia) {
+    var mq = window.matchMedia('(prefers-color-scheme: light)');
+    var follow = function () {
+      var saved = null; try { saved = localStorage.getItem('rk-theme'); } catch (e) {}
+      if (!saved) { root.setAttribute('data-theme', mq.matches ? 'light' : 'dark'); syncThemeBtn(); }
+    };
+    if (mq.addEventListener) mq.addEventListener('change', follow); else if (mq.addListener) mq.addListener(follow);
+  }
+  });
+  syncThemeBtn();
+
+  /* 30-sec / deep dive */
+  var modeBtns = document.querySelectorAll('.mode button');
+  function setMode(m, target) {
+    var was = document.body.classList.contains('brief');
+    document.body.classList.toggle('brief', m === 'brief');
+    modeBtns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.mode === m)); });
+    if (m === 'deep') document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+    if (target) { var el = document.getElementById(target); if (el) el.scrollIntoView({ behavior: 'instant', block: 'start' }); }
+    else if (was !== (m === 'brief')) window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+  document.querySelectorAll('.bv-proj').forEach(function (b) { b.addEventListener('click', function () { setMode('deep', b.dataset.go); }); });
+  modeBtns.forEach(function (b) { b.addEventListener('click', function () { setMode(b.dataset.mode); }); });
+
+  /* Typed rotating line */
+  var phrases = ['data pipelines that answer questions', 'LLM apps people actually use', 'agents that make it to production', 'dashboards that cut real costs', 'RAG systems that cite their sources'];
+  var rot = document.getElementById('rot');
+  if (!reduce) {
+    var pi = 0, ci = phrases[0].length, del = true;
+    setTimeout(function tick() {
+      if (del) { ci--; if (ci <= 0) { del = false; pi = (pi + 1) % phrases.length; } }
+      else { ci++; if (ci >= phrases[pi].length) { del = true; rot.textContent = phrases[pi]; return setTimeout(tick, 2200); } }
+      rot.textContent = phrases[pi].slice(0, ci);
+      setTimeout(tick, del ? 28 : 55);
+    }, 2500);
+  }
+
+  function esc(s) { return s.replace(/[&<>]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]; }); }
+
+  /* Count-up stats */
+  var counted = false;
+  function countUp() {
+    if (counted || reduce) return; counted = true;
+    document.querySelectorAll('[data-count]').forEach(function (el) {
+      var end = +el.dataset.count, suf = el.dataset.suffix || '', t0 = performance.now();
+      (function step(t) { var k = Math.min(1, Math.max(0, (t - t0) / 1100)), v = Math.round(end * (1 - Math.pow(1 - k, 3))); el.textContent = v + suf; if (k < 1) requestAnimationFrame(step); })(t0);
+    });
+  }
+
+  /* Reveal on scroll */
+  if ('IntersectionObserver' in window && !reduce) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+    var so = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { countUp(); so.disconnect(); } });
+    so.observe(document.querySelector('.stats'));
+  } else { document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); }); }
+
+  /* Project filters and skill lookup */
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var chips = document.querySelectorAll('.chip'), note = document.getElementById('filter-note');
+  var rows = Array.prototype.slice.call(document.querySelectorAll('#more-t tbody tr'));
+  function clearRows() { rows.forEach(function (r) { r.classList.remove('match'); }); }
+  function setChip(f) { chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c.dataset.filter === f)); }); }
+  var more = document.querySelector('.more');
+  var featured = document.querySelector('.cards');
+  function updateGroups() {
+    if (more) more.hidden = !more.querySelector('.card:not([hidden])');
+    if (featured) featured.hidden = !featured.querySelector('.card:not([hidden])');
+  }
+  var plist = document.getElementById('proj-list');
+  var LABELS = { genai: 'GenAI and agents', rag: 'RAG', data: 'Data engineering', analytics: 'Analytics' };
+  function filterCat(f) {
+    setChip(f); clearRows();
+    cards.forEach(function (c) { c.hidden = f !== 'all' && c.dataset.cat.split(' ').indexOf(f) < 0; c.classList.add('in'); });
+    plist.dataset.f = f;
+    updateGroups();
+    var n = cards.filter(function (c) { return !c.hidden; }).length;
+    note.innerHTML = f === 'all' ? '' : 'Showing <b>' + n + ' projects</b> for ' + LABELS[f] + ', most relevant first.';
+  }
+  chips.forEach(function (c) { c.addEventListener('click', function () { filterCat(c.dataset.filter); }); });
+  function norm(s) { return s.toLowerCase().replace(/[^a-z0-9]/g, ''); }
+  function filterSkill(skill, q) {
+    var keys = (q || skill).split('|').map(norm), n = 0, m = 0;
+    function has(el) { var t = norm(el.textContent); return keys.some(function (k) { return t.indexOf(k) >= 0; }); }
+    setChip(null); clearRows(); plist.dataset.f = 'skill';
+    cards.forEach(function (c) { var hit = has(c); c.hidden = !hit; c.classList.add('in'); if (hit) n++; });
+    rows.forEach(function (r) { if (has(r)) { r.classList.add('match'); m++; } });
+    updateGroups();
+    var parts = [];
+    if (n) parts.push(n + ' featured project' + (n > 1 ? 's' : ''));
+    if (m) parts.push(m + ' highlighted in the table below');
+    note.innerHTML = 'Where I used <b style="color:var(--mint)">' + esc(skill) + '</b>: ' + (parts.join(', ') || 'in my work experience, see the Journey section') + '. <button type="button" id="clear-f">Show all projects</button>';
+    document.getElementById('clear-f').addEventListener('click', function () { filterCat('all'); });
+    document.getElementById('work').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+  }
+  document.querySelectorAll('.skill').forEach(function (b) { b.type = 'button'; b.addEventListener('click', function () { filterSkill(b.textContent, b.dataset.q); }); });
+
+
+  document.querySelectorAll('.pillar').forEach(function (b) { b.addEventListener('click', function () { filterCat(b.dataset.pillar); document.getElementById('work').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); }); });
+
+  /* GenBI try-it */
+  var trs = document.querySelectorAll('#sheet-t tr'), bars = document.querySelectorAll('#sheet-c .bar');
+  var fx = document.getElementById('fx'), ans = document.getElementById('ans');
+  var Q = {
+    growth: { f: '=ASK(B2:B7, "Which month grew fastest?")', rows: [4], a: '<b>April</b> grew fastest, up 38% over March. Every month after it kept climbing.' },
+    best: { f: '=ASK(B2:B7, "What was the best month?")', rows: [6], a: '<b>June</b> was the best month at 71,000, up 69% from January.' },
+    total: { f: '=ASK(B2:B7, "Total for the half year?")', rows: [1, 2, 3, 4, 5, 6], a: 'The half-year total is <b>333,900</b>, about 55,650 a month on average.' }
+  };
+  var tTimer;
+  document.querySelectorAll('.ask').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var q = Q[b.dataset.q];
+      document.querySelectorAll('.ask').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      trs.forEach(function (r) { r.classList.remove('hl'); }); bars.forEach(function (r) { r.classList.remove('on'); });
+      ans.textContent = 'Thinking…'; clearTimeout(tTimer);
+      var k = 0;
+      (function type() {
+        fx.textContent = q.f.slice(0, ++k);
+        if (k < q.f.length && !reduce) { tTimer = setTimeout(type, 18); return; }
+        fx.textContent = q.f;
+        q.rows.forEach(function (i) { trs[i].classList.add('hl'); bars[i - 1].classList.add('on'); });
+        ans.innerHTML = q.a;
+      })();
+    });
+  });
+
+  /* Copy email */
+  var copied = document.getElementById('copied');
+  document.getElementById('copy-email').addEventListener('click', function () {
+    function ok() { copied.textContent = 'Copied ✓'; setTimeout(function () { copied.textContent = ''; }, 2000); }
+    if (navigator.clipboard) navigator.clipboard.writeText(EMAIL).then(ok, function () { copied.textContent = EMAIL; });
+    else copied.textContent = EMAIL;
+  });
+
+
+  /* Ask Riya chat */
+  var chat = document.getElementById('chat'), fab = document.getElementById('chat-fab'), log = document.getElementById('chat-log');
+  var qbox = document.getElementById('chat-qs'), cform = document.getElementById('chat-form'), cin = document.getElementById('chat-input');
+  var CASE = function (id, label) { return '<a href="#' + id + '" data-case="' + id + '">' + (label || 'See the case study') + '</a>'; };
+  var QA = [
+    { q: 'What does Riya build?', k: ['build', 'builds', 'work', 'specialize', 'focus', 'skills'],
+      a: 'I build AI products end to end: RAG systems that cite their sources, multi-agent workflows, and LLM-powered analytics. I started as a data analyst, so I also build the pipelines underneath, which means the AI works on clean data.' },
+    { q: "What's her strongest project?", k: ['strongest', 'best project', 'proud', 'genbi', 'project', 'projects'],
+      a: 'GenBI, the AI analytics product I built at TwinAI. You upload a CSV or Excel file, it profiles every column, Azure OpenAI picks the right chart from 14 types, and Gemini explains what is driving each KPI. I took it from prototype to a deployed product with auth and Stripe billing.<div class="links">' + CASE('p-genbi') + '</div>' },
+    { q: 'Is she a fit for an AI Engineer role?', k: ['ai', 'engineer', 'llm', 'rag', 'agent', 'genai', 'ml'],
+      a: 'Yes. I shipped LLM features to production at TwinAI with Azure OpenAI, Gemini, and prompt engineering. For ORBIT I built MCP tools and a supervisor agent, for Smart Expense a 3-agent workflow in Google ADK, and I have built RAG services with Pinecone and ChromaDB. I also handle evaluation and deployment on GCP.<div class="links">' + CASE('p-orbit', 'ORBIT') + CASE('p-expense', 'Smart Expense') + '</div>' },
+    { q: "What's her data engineering experience?", k: ['data engineering', 'pipeline', 'etl', 'airflow', 'warehouse', 'engineering'],
+      a: 'A year at AgriGain automating ETL in Python and Airflow, which made pipelines 25% more reliable. Before that, Teradata at Swastish. In grad school I built the scrapers, GCS storage, and Airflow DAGs behind ORBIT, and loaded 12M+ records into a cloud warehouse with Talend. Tools: Airflow, PostgreSQL, Snowflake, BigQuery, Docker.' },
+    { q: 'Is she a fit for a Data Analyst role?', k: ['analyst', 'analytics', 'dashboard', 'power bi', 'tableau', 'sql', 'bi'],
+      a: 'Yes. At AgriGain my Power BI dashboards cut marketing costs by 17% and lifted sales by 20%, and my EDA in PostgreSQL and Python cut decision cycles by 12%. I have segmented 10M+ retail transactions into customer cohorts to drive assortment and promotion ideas, and built a Bayesian model on 1M+ trade records (R² = 0.82). Comfortable with SQL (CTEs, window functions), advanced Excel, Power BI, Tableau, and Looker.' },
+    { q: 'Why should we hire her?', k: ['hire', 'why', 'stand out', 'different', 'strength'],
+      a: 'I connect the business question to a working system. My dashboards moved real numbers, and at TwinAI I shipped a full AI product, not just a demo. I also care about the unglamorous parts: clean data, evaluation, and getting things deployed.' },
+    { q: 'When can she start?', k: ['start', 'available', 'availability', 'graduate', 'when', 'join'],
+      a: 'I finish my MS in Information Systems at Northeastern in December 2026 and I am looking for full-time roles from then. Email me and we can talk timing.' },
+    { q: 'How do I contact her?', k: ['contact', 'email', 'reach', 'linkedin', 'resume', 'phone', 'talk'],
+      a: 'Email is fastest: <a href="mailto:' + EMAIL + '">' + EMAIL + '</a><div class="links"><a href="https://www.linkedin.com/in/riya-kapadnis-8957491ba/" target="_blank" rel="noopener">LinkedIn</a><a href="' + RESUME + '" target="_blank" rel="noopener">Resume</a><a href="https://github.com/riyask29" target="_blank" rel="noopener">GitHub</a></div>' }
+  ];
+  var GREET = "Hey! I'm Riya. Pick a question below, or type your own, and I'll answer about my work 👇";
+  var asked = {}, busy = false;
+  function bubble(cls, html) { var d = document.createElement('div'); d.className = 'msg ' + cls; d.innerHTML = html; log.appendChild(d); log.scrollTop = log.scrollHeight; return d; }
+  function renderQs() {
+    qbox.innerHTML = '';
+    QA.forEach(function (item, i) { if (asked[i]) return; var b = document.createElement('button'); b.type = 'button'; b.textContent = item.q; b.addEventListener('click', function () { ask(item.q, i); }); qbox.appendChild(b); });
+    qbox.hidden = !qbox.children.length;
+  }
+  function reply(html) {
+    busy = true;
+    var t = bubble('bot', '<span class="typing" aria-label="Typing"><i></i><i></i><i></i></span>');
+    setTimeout(function () { t.innerHTML = html; busy = false; log.scrollTop = log.scrollHeight; }, reduce ? 0 : 650);
+  }
+  function ask(text, i) {
+    if (busy) return;
+    bubble('me', esc(text));
+    if (i == null) i = match(text);
+    if (i < 0) { reply("Good question! I only have quick answers here, so the best way to get that one answered is to email me at <a href=\"mailto:" + EMAIL + "\">" + EMAIL + "</a>. Or try a question below."); return; }
+    asked[i] = true; renderQs(); reply(QA[i].a);
+  }
+  function match(text) {
+    var t = ' ' + text.toLowerCase().replace(/[^a-z0-9 ]/g, ' ') + ' ', best = -1, score = 0;
+    QA.forEach(function (item, i) { var s2 = 0; item.k.forEach(function (w) { if (t.indexOf(' ' + w + ' ') >= 0 || (w.length > 4 && t.indexOf(w) >= 0)) s2 += w.length > 3 ? 2 : 1; }); if (s2 > score) { score = s2; best = i; } });
+    return score >= 2 ? best : -1;
+  }
+  function resetChat() { log.innerHTML = ''; asked = {}; busy = false; bubble('bot', GREET); renderQs(); }
+  function openChat() { chat.hidden = false; fab.setAttribute('aria-expanded', 'true'); fab.querySelector('span').textContent = 'Close'; fab.querySelector('use').setAttribute('href', '#i-x'); if (!log.children.length) resetChat(); }
+  function closeChat() { chat.hidden = true; fab.setAttribute('aria-expanded', 'false'); fab.querySelector('span').textContent = 'Ask Riya'; fab.querySelector('use').setAttribute('href', '#i-chat'); }
+  fab.addEventListener('click', function () { chat.hidden ? openChat() : closeChat(); });
+  document.getElementById('chat-close').addEventListener('click', function () { closeChat(); fab.focus(); });
+  document.getElementById('chat-reset').addEventListener('click', resetChat);
+  cform.addEventListener('submit', function (e) { e.preventDefault(); var v = cin.value.trim(); if (v) { ask(v); cin.value = ''; } });
+  log.addEventListener('click', function (e) { var a = e.target.closest('a[data-case]'); if (a) { e.preventDefault(); closeChat(); setMode('deep', a.dataset.case); } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !chat.hidden) closeChat(); });
+
+  document.getElementById('g-copy').addEventListener('click', function () {
+    var n = document.getElementById('g-note');
+    function ok() { n.textContent = 'Copied ' + EMAIL; setTimeout(function () { n.textContent = ''; }, 2500); }
+    if (navigator.clipboard) navigator.clipboard.writeText(EMAIL).then(ok, function () { n.textContent = EMAIL; }); else n.textContent = EMAIL;
+  });
+
+
+  /* Role links: ?role=analyst | data | ai */
+  (function () {
+    var role = null;
+    try { role = new URLSearchParams(location.search).get('role'); } catch (e) {}
+    var ROLES = {
+      analyst: { filter: 'analytics', title: 'Data Analyst', line: 'Data Analyst · Data Engineer · AI Engineer',
+        tools: 'SQL and Power BI · Python and statistics · Airflow pipelines',
+        looking: 'Full-time Data Analyst roles (also open to Data Engineer and AI Engineer)',
+        phrase: 'dashboards that cut real costs', q: 'Is she a fit for a Data Analyst role?',
+        top: [['p-supermarket', 'i-wallet', 'Supermarket analytics', '· Customer segmentation across 10M+ retail transactions.', 'Snowflake, Scikit-learn, Power BI · see the case study'],
+              ['p-health', 'i-doc', 'Health insurance KPIs', '· Reconciled 12M+ records into auditable claims dashboards.', 'BigQuery, Looker, Power BI · see the case study'],
+              ['p-genbi', 'i-chart', 'GenBI', '· Upload a spreadsheet, get charts, KPIs, and insights. No SQL.', 'Industry project @ TwinAI · see the case study']] },
+      data: { filter: 'data', title: 'Data Engineer', line: 'Data Engineer · AI Engineer · Data Analyst',
+        tools: 'Airflow pipelines · cloud warehouses · data quality',
+        looking: 'Full-time Data Engineer roles (also open to AI Engineer and Data Analyst)',
+        phrase: 'data pipelines that answer questions', q: "What's her data engineering experience?",
+        top: [['p-lantern', 'i-doc', 'LANTERN', '· Airflow ELT on GCP for thousands of SEC filings.', 'Airflow, GCP, DVC, data quality · see the case study'],
+              ['p-orbit', 'i-agent', 'ORBIT', '· Scrapers, GCS, and Airflow DAGs behind a PE platform.', 'Airflow, GCP, MCP, RAG · see the case study'],
+              ['p-health', 'i-doc', 'Health insurance warehouse', '· 12M+ records reconciled with Talend ETL and BigQuery.', 'BigQuery, Talend, lineage · see the case study']] },
+      ai: { filter: 'genai', title: 'AI Engineer', line: 'AI Engineer · Data Engineer · Data Analyst',
+        tools: 'LLMs and RAG · AI agents · Airflow pipelines',
+        looking: 'Full-time AI Engineer roles (also open to Data Engineer and Data Analyst)',
+        phrase: 'LLM apps people actually use', q: 'Is she a fit for an AI Engineer role?', top: null }
+    };
+    var r = ROLES[role];
+    if (!r) return;
+    function set(id, t) { var el = document.getElementById(id); if (el) el.textContent = t; }
+    set('role-line', r.line); set('bv-role', r.line); set('tools-line', r.tools); set('g-looking', r.looking);
+    document.title = 'Riya Kapadnis | ' + r.title;
+    var pi = phrases.indexOf(r.phrase);
+    if (pi > 0) { phrases.splice(pi, 1); phrases.unshift(r.phrase); rot.textContent = r.phrase; }
+    var pl = document.getElementById('pillars'), lead = pl && pl.querySelector('[data-pillar="' + r.filter + '"]');
+    if (lead) pl.insertBefore(lead, pl.firstChild);
+    if (r.top) {
+      document.getElementById('bv-projects').innerHTML = r.top.map(function (t) {
+        return '<button class="bv-proj" type="button" data-go="' + t[0] + '"><svg><use href="#' + t[1] + '"/></svg><div><b>' + t[2] + '</b> <span>' + t[3] + '</span><em>' + t[4] + '</em></div></button>';
+      }).join('');
+      document.querySelectorAll('.bv-proj').forEach(function (b) { b.addEventListener('click', function () { setMode('deep', b.dataset.go); }); });
+    }
+    var qi = -1; QA.forEach(function (it, i) { if (it.q === r.q) qi = i; });
+    if (qi > 0) { QA.unshift(QA.splice(qi, 1)[0]); }
+    filterCat(r.filter);
+    note.innerHTML = 'Showing the projects most relevant to <b>' + r.title + '</b> roles first. <button type="button" id="clear-role">Show all projects</button>';
+    document.getElementById('clear-role').addEventListener('click', function () { filterCat('all'); });
+  })();
+})();
+</script>
+</body>
+</html>
