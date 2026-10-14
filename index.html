@@ -389,16 +389,12 @@ kbd { font-family: "JetBrains Mono", monospace; font-size: 0.78rem; border: 1px 
 .typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: bob 1s infinite; }
 .typing i:nth-child(2) { animation-delay: .15s; } .typing i:nth-child(3) { animation-delay: .3s; }
 @keyframes bob { 0%, 60%, 100% { transform: none; opacity: .5; } 30% { transform: translateY(-4px); opacity: 1; } }
-.chat-qs { border-top: 1px solid var(--line); padding: 0.75rem 1rem 0.5rem; display: flex; flex-wrap: wrap; gap: 0.45rem; max-height: 9.5rem; overflow-y: auto; }
+.chat-qs { border-top: 1px solid var(--line); padding: 0.75rem 1rem 1rem; display: flex; flex-wrap: wrap; gap: 0.45rem; max-height: 9.5rem; overflow-y: auto; }
 .chat-qs button {
   border: 1px solid color-mix(in srgb, var(--mint) 45%, transparent); color: var(--mint); background: var(--mint-soft);
   border-radius: 999px; padding: 0.35rem 0.8rem; font-size: 0.85rem; cursor: pointer; text-align: left;
 }
 .chat-qs button:hover { background: color-mix(in srgb, var(--mint) 22%, transparent); }
-.chat-form { display: flex; gap: 0.5rem; padding: 0.5rem 1rem 0.9rem; }
-.chat-form input { flex: 1; min-width: 0; background: var(--surface-2); border: 1px solid var(--line); color: var(--text); border-radius: 10px; padding: 0.6rem 0.8rem; font: inherit; font-size: 0.92rem; }
-.chat-form input:focus { outline: none; border-color: var(--mint); }
-.chat-form button { border: 0; background: var(--mint); color: var(--mint-ink); border-radius: 10px; padding: 0 0.9rem; cursor: pointer; font-weight: 600; }
 @media (max-width: 520px) {
   .chat { right: 0.5rem; left: 0.5rem; width: auto; bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px)); height: min(34rem, calc(100vh - 7rem)); }
 }
@@ -1001,10 +997,6 @@ kbd { font-family: "JetBrains Mono", monospace; font-size: 0.78rem; border: 1px 
   </div>
   <div class="chat-log" id="chat-log" aria-live="polite"></div>
   <div class="chat-qs" id="chat-qs" aria-label="Suggested questions"></div>
-  <form class="chat-form" id="chat-form" autocomplete="off">
-    <input id="chat-input" type="text" placeholder="Or type a question…" aria-label="Type a question">
-    <button type="submit">Ask</button>
-  </form>
 </div>
 
 
@@ -1166,7 +1158,7 @@ kbd { font-family: "JetBrains Mono", monospace; font-size: 0.78rem; border: 1px 
 
   /* Ask Riya chat */
   var chat = document.getElementById('chat'), fab = document.getElementById('chat-fab'), log = document.getElementById('chat-log');
-  var qbox = document.getElementById('chat-qs'), cform = document.getElementById('chat-form'), cin = document.getElementById('chat-input');
+  var qbox = document.getElementById('chat-qs');
   var CASE = function (id, label) { return '<a href="#' + id + '" data-case="' + id + '">' + (label || 'See the case study') + '</a>'; };
   var QA = [
     { q: 'What does Riya build?', k: ['build', 'builds', 'work', 'specialize', 'focus', 'skills'],
@@ -1186,13 +1178,15 @@ kbd { font-family: "JetBrains Mono", monospace; font-size: 0.78rem; border: 1px 
     { q: 'How do I contact her?', k: ['contact', 'email', 'reach', 'linkedin', 'resume', 'phone', 'talk'],
       a: 'Email is fastest: <a href="mailto:' + EMAIL + '">' + EMAIL + '</a><div class="links"><a href="https://www.linkedin.com/in/riya-kapadnis-8957491ba/" target="_blank" rel="noopener">LinkedIn</a><a href="' + RESUME + '" target="_blank" rel="noopener">Resume</a><a href="https://github.com/riyask29" target="_blank" rel="noopener">GitHub</a></div>' }
   ];
-  var GREET = "Hey! I'm Riya. Pick a question below, or type your own, and I'll answer about my work 👇";
+  var GREET = "Hey! I'm Riya. Pick a question below and I'll answer about my work 👇";
   var asked = {}, busy = false;
   function bubble(cls, html) { var d = document.createElement('div'); d.className = 'msg ' + cls; d.innerHTML = html; log.appendChild(d); log.scrollTop = log.scrollHeight; return d; }
   function renderQs() {
     qbox.innerHTML = '';
     QA.forEach(function (item, i) { if (asked[i]) return; var b = document.createElement('button'); b.type = 'button'; b.textContent = item.q; b.addEventListener('click', function () { ask(item.q, i); }); qbox.appendChild(b); });
-    qbox.hidden = !qbox.children.length;
+    if (!qbox.children.length) {
+      var r = document.createElement('button'); r.type = 'button'; r.textContent = 'Start over'; r.addEventListener('click', resetChat); qbox.appendChild(r);
+    }
   }
   function reply(html) {
     busy = true;
@@ -1217,7 +1211,6 @@ kbd { font-family: "JetBrains Mono", monospace; font-size: 0.78rem; border: 1px 
   fab.addEventListener('click', function () { chat.hidden ? openChat() : closeChat(); });
   document.getElementById('chat-close').addEventListener('click', function () { closeChat(); fab.focus(); });
   document.getElementById('chat-reset').addEventListener('click', resetChat);
-  cform.addEventListener('submit', function (e) { e.preventDefault(); var v = cin.value.trim(); if (v) { ask(v); cin.value = ''; } });
   log.addEventListener('click', function (e) { var a = e.target.closest('a[data-case]'); if (a) { e.preventDefault(); closeChat(); setMode('deep', a.dataset.case); } });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !chat.hidden) closeChat(); });
 
